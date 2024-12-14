@@ -1,0 +1,45 @@
+/* Basic Styles */
+@font-face {
+    font-family: 'Revamped'; 
+    src: url('../fonts/revamped.ttf'); 
+}
+@font-face {
+    font-family: 'Nabulist'; 
+    src: url('../fonts/nabulist.otf'); 
+}
+@font-face {
+    font-family: 'Minecraft'; 
+    src: url('../fonts/minecraft.ttf'); 
+}
+@font-face {
+    font-family: 'Bloodytype'; 
+    src: url('../fonts/Bloodytype.otf'); 
+}
+@font-face {
+    font-family: 'Queensides'; 
+    src: url('../fonts/Queensides.ttf'); 
+}
+@font-face {
+    font-family: 'QueensidesLight'; 
+    src: url('../fonts/QueensidesLight.ttf'); 
+}
+@font-face {
+    font-family: 'QueensidesMedium'; 
+    src: url('../fonts/QueensidesMedium.ttf'); 
+}
+@font-face {
+    font-family: 'ShiftyNotes'; 
+    src: url('../fonts/ShiftyNotes.ttf'); 
+}
+@font-face {
+    font-family: 'Bondo'; 
+    src: url('../fonts/bondo.ttf'); 
+}
+@font-face {
+    font-family: 'Sunnyspells'; 
+    src: url('../fonts/SunnySpells.ttf'); 
+}
+@font-face {
+    font-family: 'Superfunky'; 
+    src: url('../fonts/superfunky.ttf'); 
+}

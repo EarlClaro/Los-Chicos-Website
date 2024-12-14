@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum=scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="icon" href="images/logo.png">
+    <meta name="description" content="The official website for the Los Chicos Minecraft server.">
+    <meta name="author" content="Los Chicos Team">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+
+    <title>Los Chicos | Home</title>
+</head>
+<body>
+    <!--Navbar-->
+    <div class="navbar">
+        <div class="menu-mobile">
+            <a href="index.html">
+                <div class="logo">
+                    <img src="images/logo2.png" alt="Los Chicos logo" class="logo-img">
+                    <h3 class="server-name" style="color: #FF4500;">Los Chicos</h3>
+                </div>
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars" style="color: #FF4500;"></i>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="index.html" class="link">Home</a>
+            <a href="rules.html" class="link">Rules</a>
+            <a href="admin-team.html" class="link">The Team</a>
+            <a href="contact.html" class="link">Contact</a>
+            <a href="shop.html" class="link">Shop</a>
+            <a href="cart.html" class="link">Cart</a>
+        </div>
+    </div>
+
+    <!--Header-->
+    <section id="header">
+        <div class="content">
+
+            <div class="left">
+                <div class="server-name">
+                    <p style="color: #ff652d;">Los Chicos Minecraft Server</p>
+                    <h1 class="minecraft-server-ip" style="color: #FF4500;">loschicos.mcgo.io</h1>
+                </div>
+                <p class="server-description" style="color: #9f9f9f;">
+                    Join Los Chicos and immerse yourself in a world of custom adventures, dungeons, and epic battles.
+                    <br><br>Play with friends, conquer quests, and become a legend.
+                </p>
+                <div class="buttons">
+                    <button class="copy-ip">Copy IP</button>
+                    <a href="#about"><button class="how-to-join">Show more</button></a>
+                </div>
+                <p class="ip-copied" style="color: white;">IP was successfully copied!</p>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        // Get references to the button and IP elements
+                        const copyIpButton = document.querySelector(".copy-ip");
+                        const serverIpElement = document.querySelector(".minecraft-server-ip");
+                        const ipCopiedMessage = document.querySelector(".ip-copied");
+                
+                        copyIpButton.addEventListener("click", () => {
+                            // Get the IP address from the serverIpElement
+                            const ip = serverIpElement.textContent;
+                
+                            // Use the Clipboard API to copy the IP address to the clipboard
+                            navigator.clipboard.writeText(ip).then(() => {
+                                // Show success message
+                                ipCopiedMessage.style.display = "block";
+                
+                                // Hide the success message after 2 seconds
+                                setTimeout(() => {
+                                    ipCopiedMessage.style.display = "none";
+                                }, 2000);
+                            }).catch(err => {
+                                console.error("Failed to copy text: ", err);
+                            });
+                        });
+                    });
+                </script>
+            </div>
+
+            <div class="right">
+                <img src="images/logo2.png" alt="Los Chicos logo" class="logo-img logo-img-header">
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="icon">
+                            <i class="fa-brands fa-discord" style="color: #FF4500;"></i>
+                        </div>
+                        <div class="texts">
+                            <h5 class="stat-title" style="color: #FF4500;">Discord Server</h5>
+                            <p><span class="stat-number discord-online-users">No</span> users online</p>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="icon">
+                            <i class="fa-solid fa-server" style="color: #FF4500;"></i>
+                        </div>
+                        <div class="texts">
+                            <h5 class="stat-title" style="color: #FF4500;">Minecraft Server</h5>
+                            <p><span class="stat-number minecraft-online-players">No</span> players online</p>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    async function updateDiscordOnlineUsers(widgetData) {
+                        const discordOnlineUsersElement = document.querySelector('.discord-online-users');
+                        const presenceCount = widgetData.presence_count; // Total online users
+            
+                        discordOnlineUsersElement.textContent = presenceCount || "No"; // Update the text content with the number of online users
+                    }
+            
+                    // Example widgetData from Discord API
+                    const widgetData = {
+                        "guild_id": "1227612162621575241",
+                        "presence_count": 14, // Example value
+                        "members": [
+                            {"username": "Chico", "avatar_url": "https://..."},
+                            {"username": "dont click here", "avatar_url": "https://..."},
+                            // ... other members
+                        ]
+                    };
+            
+                    // Call the function to update the online users count
+                    updateDiscordOnlineUsers(widgetData);
+                </script>
+                 <script>
+                    // Function to fetch and update Minecraft online players
+                    async function updateMinecraftOnlinePlayers(serverIp) {
+                        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIp}`);
+                        const data = await response.json();
+            
+                        const minecraftOnlinePlayersElement = document.querySelector('.minecraft-online-players');
+                        if (data.online) {
+                            const playerCount = data.players.online || "No";
+                            minecraftOnlinePlayersElement.textContent = playerCount;
+                        } else {
+                            minecraftOnlinePlayersElement.textContent = "Server Offline";
+                        }
+                    }
+            
+                    // Example server IP
+                    const minecraftServerIp = "loschicos.mcgo.io"; // Replace with your actual server IP
+            
+                    // Call the function to update the Minecraft online players count
+                    updateMinecraftOnlinePlayers(minecraftServerIp);
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <section id="minigames">
+        <div class="content miniGames-list">
+            <div class="game">
+                <img src="images/pick2.png" alt="About Us">
+
+                <div class="info" id="about">
+                    <h2 class="section-title" style="color: #FF4500;">Who are we?</h2>
+                    <div class="game-description">
+                        <p style="color: #acacac;"><b>Los Chicos is a RPG Minecraft server packed with custom features like unique items, mobs, quests, enchantments, and more. Explore custom dungeons, challenge bosses, and enjoy an extensive economy system.</b></p>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="game">
+                <img src="images/pick5.png" alt="Survival image" style="width: 50%;">
+
+                <div class="info">
+                    <h2 class="section-title" style="color: #FF4500;">Survival</h2>
+                    <div class="game-description">
+                        <p style="color: #ffffff;">"Embark on an epic journey in our Survival RPG server, where custom mobs, quests, and dungeons await. Build, explore, and conquer with unique items, custom enchantments, and a thriving economy."</p>
+                        <ul class="services" style="color: #00ffe5;">
+                            <li class="service">RPG Skills and Items</li>
+                            <li class="service">Dungeons and Bosses</li>
+                            <li class="service">Quests and Scrolls</li>
+                            <li class="service">Custom Crafting with Custom Weapons</li>
+                            <li class="service">Custom Enchantments</li>
+                            <li class="service">Slimefun</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--Discord-->
+    <section id="discord">
+        <div class="content">
+            <h2 class="section-title" style="color: #FF4500;">Have a <span>problem</span> or want to get in touch with others? <br> Join our <span>Discord!</span></h2>
+            <a href="https://discord.gg/sEfxamqWkg" class="discord-link"><button class="join-discord" style="background-color: #FF4500; color: #FFF;">Join Discord</button></a>
+        </div>
+    </section>
+
+    <!--Vote (max 2 vote sites)-->
+    <section id="vote">
+        <div class="content">
+            <div class="info">
+                <h2 class="section-title" style="color: #FF4500;">Why vote?</h2>
+                <p class="section-description" style="color: #cecece;">Voting helps us grow and rewards you with awesome perks!</p>
+            </div>
+
+            <div class="links voteLinks">
+                <a href="https://minecraft-mp.com/server/334518/vote/" class="url">
+                    <div class="link">
+                        <h5 style="color: #FF4500;">minecraft-mp</h5>
+                        <div class="link-description">
+                            <p class="description" style="color: #333;">Vote and earn rewards.</p>
+                            <div class="icon">
+                                <i class="fa-solid fa-circle-arrow-right" style="color: #FF4500;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.planetminecraft.com/server/los-chicos/vote/" class="url">
+                    <div class="link">
+                        <h5 style="color: #FF4500;">planetminecraft</h5>
+                        <div class="link-description">
+                            <p class="description" style="color: #333;">Vote and earn rewards.</p>
+                            <div class="icon">
+                                <i class="fa-solid fa-circle-arrow-right" style="color: #FF4500;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!--FAQs-->
+<section id="faq">
+    <div class="content">
+        <div class="info">
+            <h2 class="section-title" style="color: #FF4500;">Server <span>FAQs.</span></h2>
+            <p class="section-description" style="color: #dba81a;">Got questions? We have answers. Check out our FAQs!</p>
+        </div>
+
+        <div class="accordion faqList">
+            <div class="accordion-item">
+                <div class="accordion-item-header" style="color: #FF4500;">
+                    How to join the server?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="accordion-item-content">
+                    <p class="answer" style="color: #dba81a;">You can join by using the IP: loschicos.mcgo.io. Add the server to your Minecraft client and start playing!</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-item-header" style="color: #FF4500;">
+                    How to earn ranks?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="accordion-item-content">
+                    <p class="answer" style="color: #dba81a;">Ranks can be earned through various in-game achievements, donations, or special events.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+  <!--Footer-->
+  <footer id="footer">
+    <p class="copyright">&copy; 2024 <span class="server-name-footer">Los Chicos</span>. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" class="link tiktok-link"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" class="link instagram-link"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://discord.com/invite/sEfxamqWkg" class="link discord-link-footer"><i class="fa-brands fa-discord"></i></a>
+    </div>
+  </footer>
+
+    <script src="scripts/copyIp.js"></script>
+    <script src="scripts/dropdown.js"></script>
+    <script src="https://kit.fontawesome.com/44dfb42319.js" crossorigin="anonymous"></script>
+</body>
+</html>
+ 

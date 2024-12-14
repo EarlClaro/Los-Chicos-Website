@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/logo.png">
+    <meta name="description" content="The official website for the Los Chicos Minecraft server.">
+    <meta name="author" content="Los Chicos Team">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/rules.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <title>Los Chicos | Shop</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            overflow-x: hidden;
+        }
+
+        .shop-page {
+            display: flex;
+            padding: 30px;
+            background-color: #121212;
+        }
+
+        .shop-content {
+            flex: 1;
+            margin-left: 50px; /* Adjusted for sidebar width */
+        }
+
+        .shop-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            font-family: "QueensidesLight";
+            padding: 30px;
+            background-color: #1F1F1F;
+            border-radius: 12px;
+        }
+
+        .shop-tile {
+            background: #1E1E1E;
+            border: 1px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .shop-tile img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #333;
+        }
+
+        .shop-tile h3 {
+            margin: 15px 0;
+            color: #FFA726;
+            font-family: "Revamped";
+        }
+
+        .shop-tile p {
+            color: #B0B0B0;
+            padding: 0 15px;
+        }
+
+        .shop-tile:hover {
+            transform: scale(1.05);
+            background-color: #2A2A2A;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .shop-tile button {
+            background-color: #FFA726;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: auto;
+            transition: background-color 0.3s ease;
+        }
+
+        .shop-tile button:hover {
+            background-color: #FB8C00;
+        }
+
+        .info-button {
+            width: 24px;
+            height: 36px;
+            font-size: 14px;
+            background-color: #2A2A2A;
+            color: #FFA726;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .info-button:hover {
+            background-color: #FFA726;
+            color: #2A2A2A;
+        }
+
+
+        .info-popup p {
+            color: #E0E0E0;
+        }
+        .info-popup, .cart-popup {
+            display: none;
+            font-family: "QueensidesLight";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1F1F1F;
+            color: #E0E0E0;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+
+        .info-popup h3, .cart-popup h3 {
+            margin-top: 0;
+            color: #FFA726;
+            font-family: "Revamped";
+        }
+
+        .info-popup button, .cart-popup button {
+        background-color: #FFA726;
+        color: #1F1F1F;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+        .info-popup button:hover, .cart-popup button:hover {
+        background-color: #FB8C00;
+    }
+
+    .cart-popup input {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background-color: #2A2A2A;
+        color: #E0E0E0;
+    }
+
+        .info-popup-overlay, .cart-popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: sticky;
+            top: 50px;
+            width: 300px;
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            padding: 20px;
+            height: calc(100vh - 80px);
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: #FFA726;
+            font-weight: 700;
+        }
+
+        .category-sub-title {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 500;
+            color: #E0E0E0;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .category-title {
+            background-color: #2A2A2A;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: #FFA726;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .category-title:hover {
+            background-color: #333;
+        }
+
+        .sidebar p {
+            margin: 15px 0;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .sidebar p:hover {
+            color: #FFA726;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #E0E0E0;
+        }
+
+        .sidebar a:hover {
+            color: #FFA726;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="menu-mobile">
+            <a href="index.html">
+                <div class="logo">
+                    <img src="images/logo2.png" alt="Los Chicos logo" class="logo-img">
+                    <h3 class="server-name" style="color: #FFA726;">Los Chicos</h3>
+                </div>
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars" style="color: #FFA726;"></i>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="index.html" class="link">Home</a>
+            <a href="rules.html" class="link">Rules</a>
+            <a href="admin-team.html" class="link">The Team</a>
+            <a href="contact.html" class="link">Contact</a>
+            <a href="#shop" class="link active">Shop</a>
+            <a href="cart.html" class="link">Cart</a>
+        </div>
+    </div>
+
+    <section id="header">
+        <div class="content">
+            <div class="info">
+                <p class="minecraft-server-ip">play.loschicos.online</p>
+                <h1 class="title">Explore our <span>Shop</span></h1>
+            </div>
+            <p class="description">
+                Transform Your Gameplay – Premium Items & Ranks Available!
+            </p>
+        </div>
+    </section>
+
+    <section id="shop" class="shop-page">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h4 class="category-title">CATEGORIES</h4>
+            <h4 class="category-sub-title">
+                <i class="fas fa-crown"></i>
+                <a href="#donator-ranks" style="margin-left: 5px;">Donator Ranks</a>
+            </h4>
+            <h4 class="category-sub-title">
+                <i class="fas fa-key"></i>
+                <a href="#crate-keys" style="margin-left: 5px;">Crate Keys</a>
+            </h4>
+            <h4 class="category-sub-title">
+                <i class="fas fa-gem"></i>
+                <a href="#in-game-items" style="margin-left: 5px;">In-Game Items</a>
+            </h4>
+            <h4 class="category-sub-title">
+                <i class="fas fa-ellipsis-h"></i>
+                <a href="#other" style="margin-left: 5px;">Other</a>
+            </h4>
+        </div>
+        
+
+        <!-- Shop content -->
+        <div class="shop-content">
+            <h2 id="donator-ranks">Donator Ranks</h2>
+            <br>
+            <div class="shop-container">
+                    <!-- Donator Ranks -->
+                    <div class="shop-tile">
+                        <img src="images/Blank_Gold__Animated.gif" alt="Titan Rank">
+                        <h3>Titan</h3>
+                        <p>Rise above all with the Titan rank and reign supreme!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Titan Rank', '$1.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('titan-rank-info')"></button>
+                        </div>
+                    </div>
+                    <div class="shop-tile">
+                        <img src="images/Coins_Animated.gif" alt="Champion Rank">
+                        <h3>Champion</h3>
+                        <p>Lead the charge as a Champion with unparalleled benefits!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Champion Rank', '$3.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('champion-rank-info')"></button>
+                        </div>
+                    </div>
+                    <div class="shop-tile">
+                        <img src="images/Sword_Animated.gif" alt="Hero Rank">
+                        <h3>Hero</h3>
+                        <p>Become a hero and enjoy exclusive perks and abilities!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Hero Rank', '$4.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('hero-rank-info')"></button>
+                        </div>
+                    </div>
+                    <div class="shop-tile">
+                        <img src="images/Royal_Animated.gif" alt="Legend Rank">
+                        <h3>Legend</h3>
+                        <p>Join the ranks of legends and claim your place at the top!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Legend Rank', '$6.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('legend-rank-info')"></button>
+                        </div>
+                    </div>
+                    <div class="shop-tile">
+                        <img src="images/Dragon_Animated.gif" alt="Mythic Rank">
+                        <h3>Mythic</h3>
+                        <p>Unlock mythical powers and dominate the server with this rank!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Mythic Rank', '$8.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('mythic-rank-info')"></button>
+                        </div>
+                    </div>
+                    <div class="shop-tile">
+                        <img src="images/Skull_Animated.gif" alt="Immortal Rank">
+                        <h3>Immortal</h3>
+                        <p>Become an Undying celestial with unparallel power!</p>
+                        <div class="button-container">
+                            <button class="info-button" onclick="toggleCartPopup('Immortal Rank', '$11.99')">Add to Cart</button>
+                            <button class="fa fa-info-circle" onclick="toggleInfoPopup('immortal-rank-info')"></button>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <h2 id="crate-keys">Crate Keys</h2>
+            <br>
+            <div class="shop-container">
+                <!-- Shop tile example -->
+                <div class="shop-tile">
+                    <img src="images/Royalty1.png" alt="Chico Key">
+                    <h3>Chico Key</h3>
+                    <p>Server Special Crate to celebrate 2024 release!</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Chico Keys', '$1')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('chico-key-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/Glitch.png" alt="Cursed Key">
+                    <h3>Cursed Key</h3>
+                    <p>The most OP crate with custom weapons!</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Cursed Keys', '$1')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('cursed-key-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/Lush.png" alt="Cosmetic Key">
+                    <h3>Cosmetic Key</h3>
+                    <p>Cosmetic Items to make yourself express more vividly!</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Cosmetic Keys', '$2')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('cosmetic-key-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/Trippy.png" alt="Mystery Key">
+                    <h3>Mystery Crate</h3>
+                    <p>Random Stuff, who knows what you'll get. Maybe a cursed key maybe an egg!</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Mystery Keys', '$1')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('mystery-key-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/Water.png" alt="Fridge Key">
+                    <h3>Fridge Key</h3>
+                    <p>The key to the hidden fridge crate! (Limited Time) </p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Fridge Keys', '$2')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('fridge-key-info')"></button>
+                    </div>
+                </div>
+                <div class="shop-tile">
+                    <img src="images/Lightning.png" alt="Mythic Key">
+                    <h3>Mythic Key</h3>
+                    <p>Unknown Mythical Items! Hidden from view but holds great power.</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('10 Mythic Keys', '$3')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('mythic-key-info')"></button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <h2 id="in-game-items">Custom Items</h2>
+            <br>
+            <div class="shop-container">
+                <!-- Shop tile example -->
+                <div class="shop-tile">
+                    <img src="images/hammer_4.png" alt="Blazing Rocket">
+                    <h3>Blazing Rocket</h3>
+                    <p>The Blazing Rocket propels you into the sky with fiery speed, leaving a trail of flames. Ideal for quick escapes or dramatic entrances.</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('Blazing Rocket', '$4')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('item4-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/hammer_5.png" alt="Sentinel Battlehammer">
+                    <h3>Sentinel Battlehammer</h3>
+                    <p>The Sentinel Battlehammer is a legendary weapon, forged to protect and crush enemies with a single swing. Perfect for tank builds.</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('Sentinel Battlehammer', '$4')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('item3-info')"></button>
+                    </div>
+                </div>
+
+                <div class="shop-tile">
+                    <img src="images/scroll_cursed.png" alt="Cursed Scroll">
+                    <h3>Cursed Scroll</h3>
+                    <p>Complete this to get free Keys!!</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('Cursed Scroll', '$1')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('item2-info')"></button>
+                    </div>
+                </div>
+                <div class="shop-tile">
+                    <img src="images/enlightened_sai.png" alt="Enlightened Sai">
+                    <h3>Enlightened Sai</h3>
+                    <p>A swift and versatile dagger that can be thrown or used in close combat, dealing 14 damage and 20 base damage when thrown.</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('Enlightened Sai', '$4')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('item5-info')"></button>
+                    </div>
+                </div>
+                <div class="shop-tile">
+                    <img src="images/assassins_hand.png" alt="Assassin's Hand">
+                    <h3>Assassin's Hand</h3>
+                    <p>A deadly dagger with 15 base attack damage, doubles speed, increases dodge chance, and grants invisibility when held.</p>
+                    <div class="button-container">
+                        <button class="info-button" onclick="toggleCartPopup('Assassins Hand', '$4')">Add to Cart</button>
+                        <button class="fa fa-info-circle" aria-hidden="true" onclick="toggleInfoPopup('item6-info')"></button>
+                    </div>
+                </div>
+                                
+            </div>
+
+            <br>
+            <h2 id="other">Other</h2>
+            <br>
+            <div class="shop-container">
+                <!-- Shop tile example -->
+
+        </div>
+    </section>
+
+        <!-- Info Popup -->
+        <div id="immortal-rank-info" class="info-popup">
+            <h3>Immortal Rank</h3>
+            <p>Achieve the pinnacle of power with the Immortal rank. As an Immortal, you reign supreme over all others with unmatched abilities and benefits, such as:</p><br>
+            <ul>
+                <li><strong>Immortal Kits:</strong> Wield the ultimate gear and items, exclusive to Immortals.</li>
+                <li><strong>Infinite Warps:</strong> Set warps without limit, wherever you choose.</li>
+                <li><strong>Absolute Access:</strong> Enjoy instant server entry, no matter the circumstances.</li>
+                <li><strong>Immortal Areas:</strong> Explore every corner of the server, including the most restricted zones.</li>
+                <li><strong>Immortal Tag:</strong> Showcase your supremacy with the rarest Immortal tag in chat.</li>
+                <li><strong>Unlimited Storage:</strong> Gain access to the largest vaults for your endless treasures.</li>
+                <li><strong>Daily Immortal Rewards:</strong> Claim the most lucrative daily bonuses and exclusive items.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('immortal-rank-info')">Close</button>
+        </div>
+        
+
+        <div id="mythic-rank-info" class="info-popup">
+            <h3>Mythic Rank</h3>
+            <p>Ascend to the ranks of the gods with the Mythic rank. As a Mythic, you’ll gain unparalleled power and privileges, including:</p><br>
+            <ul>
+                <li><strong>Mythic Kits:</strong> Access divine gear and items reserved for the Mythic rank.</li>
+                <li><strong>Ultimate Warps:</strong> Set up unlimited warps to dominate every aspect of the server.</li>
+                <li><strong>Instant Entry:</strong> Immediate server access, no matter how full it is.</li>
+                <li><strong>Mythic Zones:</strong> Explore the most sacred dungeons and zones, exclusive to Mythics.</li>
+                <li><strong>Mythic Tag:</strong> Display your supremacy with a custom Mythic tag in chat.</li>
+                <li><strong>Mythic Storage:</strong> Unlock vast vaults to store your treasures.</li>
+                <li><strong>Daily Mythic Rewards:</strong> Reap the best daily bonuses and exclusive boosts.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('mythic-rank-info')">Close</button>
+        </div>
+        
+    
+        <div id="legend-rank-info" class="info-popup">
+            <h3>Legend Rank</h3>
+            <p>Become a part of the legend with the Legend rank. As a Legend, you’ll wield incredible power and enjoy exclusive benefits, including:</p><br>
+            <ul>
+                <li><strong>Legendary Kits:</strong> Receive the most powerful gear and items available to Legends.</li>
+                <li><strong>Strategic Warps:</strong> Create warps at key locations to dominate the server.</li>
+                <li><strong>Instant Access:</strong> Bypass the queue and enter the server instantly.</li>
+                <li><strong>Legendary Areas:</strong> Unlock access to top-secret dungeons and zones for Legends and above.</li>
+                <li><strong>Legend Tag:</strong> Stand out with a unique Legend tag in chat.</li>
+                <li><strong>Legend Storage:</strong> Gain extra vaults for your most valuable items.</li>
+                <li><strong>Daily Legend Rewards:</strong> Collect premium daily bonuses and boosts.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('legend-rank-info')">Close</button>
+        </div>
+        
+
+        <div id="hero-rank-info" class="info-popup">
+            <h3>Hero Rank</h3>
+            <p>Embrace your destiny as a Hero. With the Hero rank, you gain access to unique features and kits that set you apart from the rest. As a Hero, you’ll receive:</p><br>
+            <ul>
+                <li><strong>Heroic Kits:</strong> Obtain powerful gear and items exclusive to Heroes.</li>
+                <li><strong>Advanced Warps:</strong> Set up warps in crucial locations across the server.</li>
+                <li><strong>Server Access:</strong> Priority entry to the server, even during peak times.</li>
+                <li><strong>Hero Zones:</strong> Unlock special dungeons and areas restricted to Heroes and above.</li>
+                <li><strong>Hero Tag:</strong> Showcase your rank with a distinct Hero tag in chat.</li>
+                <li><strong>Enhanced Storage:</strong> Gain additional vaults for storing your items.</li>
+                <li><strong>Daily Hero Bonuses:</strong> Enjoy special daily rewards and perks.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('hero-rank-info')">Close</button>
+        </div>
+        
+
+        <div id="champion-rank-info" class="info-popup">
+            <h3>Champion Rank</h3>
+            <p>Step into the arena with the Champion rank. As a Champion, you’ll enjoy enhanced features and powerful kits that give you the edge in every battle. Unlock:</p><br>
+            <ul>
+                <li><strong>Champion Kits:</strong> Access special gear and items tailored for Champions.</li>
+                <li><strong>Extra Warps:</strong> Create additional warps for strategic advantage.</li>
+                <li><strong>VIP Access:</strong> Enjoy quicker entry to the server during busy times.</li>
+                <li><strong>Champion Areas:</strong> Explore dungeons and zones exclusive to Champions and above.</li>
+                <li><strong>Custom Tags:</strong> Display your rank with a unique Champion tag in chat.</li>
+                <li><strong>Extended Storage:</strong> Increase your in-game vault space for more items.</li>
+                <li><strong>Daily Bonuses:</strong> Receive enhanced daily rewards and boosts.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('champion-rank-info')">Close</button>
+        </div>
+        
+    
+        <div id="titan-rank-info" class="info-popup">
+            <h3>Titan Rank</h3>
+            <p>Rise above all with the Titan rank. Enjoy ultimate control, exclusive kits, and access to special areas. As a Titan, you’ll gain access to:</p><br>
+            <ul>
+                <li><strong>Exclusive Kits:</strong> Get powerful gear and items available only to Titans.</li>
+                <li><strong>Private Warps:</strong> Create and manage your own warps to teleport to custom locations.</li>
+                <li><strong>Priority Access:</strong> Skip the queue during peak times and join the server instantly.</li>
+                <li><strong>Special Areas:</strong> Explore secret zones and dungeons locked to lower ranks.</li>
+                <li><strong>Custom Tags:</strong> Stand out in chat with a unique Titan tag and custom chat colors.</li>
+                <li><strong>Increased Storage:</strong> Expand your in-game storage with additional vaults.</li>
+                <li><strong>Daily Rewards:</strong> Claim extra daily rewards and bonuses.</li>
+            </ul>
+            <button onclick="toggleInfoPopup('titan-rank-info')">Close</button>
+        </div>
+        
+        <div id="item2-info" class="info-popup">
+            <h3>Cursed Scroll</h3>
+            <p>The Cursed Scroll imbues your gear with forbidden power, granting immense strength at the cost of durability. Handle with care!</p>
+            <button onclick="toggleInfoPopup('item2-info')">Close</button>
+        </div>
+        <div id="item3-info" class="info-popup">
+            <h3>Sentinel Battlehammer</h3>
+            <p>The Sentinel Battlehammer is a legendary weapon, forged to protect and crush enemies with a single swing. Perfect for tank builds.</p>
+            <button onclick="toggleInfoPopup('item3-info')">Close</button>
+        </div>
+        <div id="item4-info" class="info-popup">
+            <h3>Blazing Rocket</h3>
+            <p>The Blazing Rocket propels you into the sky with fiery speed, leaving a trail of flames. Ideal for quick escapes or dramatic entrances.</p>
+            <button onclick="toggleInfoPopup('item4-info')">Close</button>
+        </div>
+        <div id="item5-info" class="info-popup">
+            <h3>Enlightened Sai</h3>
+            <p>The Enlightened Sai is a versatile dagger that can be thrown or used in close combat. It deals 14 damage in melee, provides a speed boost, and deals 20 base damage when thrown. Perfect for agile fighters.</p>
+            <button onclick="toggleInfoPopup('item5-info')">Close</button>
+        </div>
+        <div id="item6-info" class="info-popup">
+            <h3>Assassin's Hand</h3>
+            <p>The Assassin's Hand is a deadly dagger with 15 base attack damage. It doubles your speed, increases dodge chance, and grants invisibility when held. Right-click to dash toward your enemy and strike with precision.</p>
+            <button onclick="toggleInfoPopup('item6-info')">Close</button>
+        </div>
+                    
+        <div id="chico-key-info" class="info-popup">
+            <h3>Chico Key</h3>
+            <p>The Chico Key unlocks a special server crate to celebrate our 2024 release. Get exclusive items and boosts!</p>
+            <button onclick="toggleInfoPopup('chico-key-info')">Close</button>
+        </div>
+        
+        <div id="mystery-key-info" class="info-popup">
+            <h3>Mystery Key</h3>
+            <p>Unlock the Mystery Crate for a chance to win a random selection of valuable items, from rare materials to powerful tools!</p>
+            <button onclick="toggleInfoPopup('mystery-key-info')">Close</button>
+        </div>
+        
+        <div id="cursed-key-info" class="info-popup">
+            <h3>Cursed Key</h3>
+            <p>The Cursed Crate contains powerful custom weapons that hold dark and mysterious powers. Are you brave enough to unlock them?</p>
+            <button onclick="toggleInfoPopup('cursed-key-info')">Close</button>
+        </div>
+        
+        <div id="cosmetic-key-info" class="info-popup">
+            <h3>Cosmetic Key</h3>
+            <p>Use the Cosmetic Key to unlock stylish items that let you personalize your appearance and stand out in the server!</p>
+            <button onclick="toggleInfoPopup('cosmetic-key-info')">Close</button>
+        </div>
+        
+        <div id="fridge-key-info" class="info-popup">
+            <h3>Fridge Key</h3>
+            <p>Unlock the Fridge Crate for exclusive ice-themed items, including the Ice Kit, powerful frozen weapons, and the Frozen Scroll!</p>
+            <button onclick="toggleInfoPopup('fridge-key-info')">Close</button>
+        </div>
+        
+        <div id="mythic-key-info" class="info-popup">
+            <h3>Mythic Key</h3>
+            <p>The Mythic Crate holds legendary items and treasures of immense power. Only the most daring adventurers should attempt to unlock it!</p>
+            <button onclick="toggleInfoPopup('mythic-key-info')">Close</button>
+        </div>
+        
+        <!-- Cart Popup -->
+        <div class="cart-popup-overlay" id="cart-popup-overlay" onclick="closeCartPopup()"></div>
+        <div class="cart-popup" id="cart-popup">
+            <h3>Item Name: <span id="popup-item-name"></span></h3>
+            <h3>Price: <span id="popup-item-price"></span></h3>
+            <br>
+            <label for="minecraft-username">Minecraft Username:</label>
+            <input type="text" id="minecraft-username" placeholder="Enter your Minecraft username">
+            
+            <button onclick="closeCartPopup()">Close</button>
+            <button onclick="payForItem()">Pay</button>
+        </div>
+        <script>
+            function toggleCartPopup(itemName, itemPrice) {
+
+
+                // Show the cart popup
+                document.getElementById('cart-popup-overlay').style.display = 'block';
+                document.getElementById('cart-popup').style.display = 'block';
+
+                // Set the item name and price in the popup
+                document.getElementById('popup-item-name').textContent = itemName;
+                document.getElementById('popup-item-price').textContent = itemPrice;
+            }
+
+        
+            function closeCartPopup() {
+                // Hide the cart popup
+                document.getElementById('cart-popup-overlay').style.display = 'none';
+                document.getElementById('cart-popup').style.display = 'none';
+            }
+        
+        
+            function payForItem() {
+                // Implement the payment logic here
+                var username = document.getElementById('minecraft-username').value;
+                var itemName = document.getElementById('popup-item-name').textContent;
+                var itemPrice = document.getElementById('popup-item-price').textContent;
+        
+                // You can then proceed with the payment using this data
+                console.log("Username: " + username);
+                console.log("Item: " + itemName);
+                console.log("Price: " + itemPrice);
+        
+                // Close the popup after payment
+                closeCartPopup();
+            }
+        </script>
+    
+    <script>
+        function toggleInfoPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            const overlay = document.querySelector('.info-popup-overlay');
+
+            if (popup.style.display === 'block') {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+        }
+    </script>
+        <div class="info-popup-overlay" onclick="toggleInfoPopup('')"></div>
+    <!--Footer-->
+    <footer id="footer">
+        <p class="copyright">&copy; 2024 <span class="server-name-footer">Los Chicos</span>. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" class="link tiktok-link"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" class="link instagram-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://discord.com/invite/sEfxamqWkg" class="link discord-link-footer"><i class="fa-brands fa-discord"></i></a>
+        </div>
+      </footer>
+</body>
+
+</html>

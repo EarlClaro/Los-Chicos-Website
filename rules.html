@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="icon" href="images/logo.png">
+  <meta name="description" content="Free, modern and nice web template for Minecraft server.">
+  <meta name="author" content="Astronawta">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages/rules.css">
+
+  <title>Los Chicos | Rules</title>
+</head>
+<body>
+  <!--Navbar-->
+  <div class="navbar">
+    <div class="menu-mobile">
+      <a href="index.html">
+        <div class="logo">
+          <img src="images/logo.png" alt="Server logo" class="logo-img">
+          <h3 class="server-name">LosChicos</h3>
+        </div>
+      </a>
+      <div class="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+        <div class="links">
+            <a href="index.html" class="link">Home</a>
+            <a href="rules.html" class="link">Rules</a>
+            <a href="admin-team.html" class="link">The Team</a>
+            <a href="contact.html" class="link">Contact</a>
+            <a href="shop.html" class="link">Shop</a>
+            <a href="cart.html" class="link">Cart</a>
+        </div>
+  </div>
+
+  <!--Header-->
+  <section id="header">
+    <div class="content">
+      <div class="info">
+        <p class="minecraft-server-ip">mc.example.com</p>
+        <h1 class="title">Follow the <span>rules</span></h1>
+      </div>
+      <p class="description">
+        List of all Minecraft and Discord server rules.
+      </p>
+    </div>
+  </section>
+
+  <!--Rules-->
+  <section id="rules">
+    <div class="content">
+      <div class="warning">
+        <p>Ignorance of the rules is no excuse!</p>
+        <div class="icon">
+          <i class="fa-solid fa-exclamation"></i>
+        </div>
+      </div>
+
+      <div class="minecraft-rules rules">
+        <h2 class="minecraft-rules-title rules-title">Minecraft server</h2>
+		<ol class="rules-list">
+    	 <li class="rule">Respect all players and staff. No harassment, bullying, or discrimination.</li>
+         <li class="rule">No cheating, hacking, or exploiting bugs. Play fair to keep the game enjoyable for everyone.</li>
+    	 <li class="rule">Do not spam chat or use excessive caps. Keep the chat clean and friendly.</li>
+    	 <li class="rule">Griefing or stealing from other players is strictly prohibited.</li>
+         <li class="rule">Avoid advertising other servers or unrelated content.</li>
+         <li class="rule">Do not use offensive language or inappropriate content.</li>
+         <li class="rule">Respect the server’s economy and do not exploit game mechanics.</li>
+         <li class="rule">Follow staff instructions and do not argue with their decisions.</li>
+        </ol>
+
+      </div>
+
+      <div class="discord-rules rules">
+        <h2 class="discord-rules-title rules-title">Discord server</h2>
+        <ol class="rules-list">
+          <li class="rule">Be respectful to everyone. Harassment, hate speech, and discrimination will not be tolerated.</li>
+          <li class="rule">No spamming in any of the channels. Keep the conversation relevant and on-topic.</li>
+          <li class="rule">Avoid sharing personal information or doxxing others.</li>
+          <li class="rule">Do not post NSFW content or anything that may be inappropriate for younger audiences.</li>
+          <li class="rule">Keep discussions in the appropriate channels. Use the correct channels for specific topics.</li>
+          <li class="rule">No self-promotion or advertising without permission from the server staff.</li>
+          <li class="rule">Listen to and respect the decisions of the server moderators and admins.</li>
+          <li class="rule">If you encounter any issues, please report them to the staff instead of trying to handle them yourself.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!--Server Join-->
+  <section id="join-server">
+    <div class="content">
+      <h2 class="section-title">If you have read the <span>rules</span>, you can go and <span>enjoy the fun</span> on our server!</h2>
+      <div class="buttons">
+        
+        <button class="copy-ip">Copy IP</button>
+        <a href="https://discord.gg/sEfxamqWkg" class="discord-link"><button class="join-discord">Join Discord</button></a>
+      </div>
+      <p class="ip-copied">IP was successfully copied!</p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          // Get references to the button and IP elements
+          const copyIpButton = document.querySelector(".copy-ip");
+          const serverIpElement = document.querySelector(".minecraft-server-ip");
+          const ipCopiedMessage = document.querySelector(".ip-copied");
+  
+          copyIpButton.addEventListener("click", () => {
+              // Get the IP address from the serverIpElement
+              const ip = serverIpElement.textContent;
+  
+              // Use the Clipboard API to copy the IP address to the clipboard
+              navigator.clipboard.writeText(ip).then(() => {
+                  // Show success message
+                  ipCopiedMessage.style.display = "block";
+  
+                  // Hide the success message after 2 seconds
+                  setTimeout(() => {
+                      ipCopiedMessage.style.display = "none";
+                  }, 2000);
+              }).catch(err => {
+                  console.error("Failed to copy text: ", err);
+              });
+          });
+      });
+  </script>
+  </section>
+
+  <!--Footer-->
+  <footer id="footer">
+    <p class="copyright">&copy; 2024 <span class="server-name-footer">Los Chicos</span>. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" class="link tiktok-link"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" class="link instagram-link"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://discord.com/invite/sEfxamqWkg" class="link discord-link-footer"><i class="fa-brands fa-discord"></i></a>
+    </div>
+  </footer>
+</body>
+<script src="js/script.js"></script>
+<script src="https://kit.fontawesome.com/cbf5ee59c8.js" crossorigin="anonymous"></script>
+</html>

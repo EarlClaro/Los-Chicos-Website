@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/logo.png">
+    <meta name="description" content="The official website for the Los Chicos Minecraft server.">
+    <meta name="author" content="Los Chicos Team">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/rules.css">
+    <title>Los Chicos | Cart</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #1E1E1E;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #E0E0E0;
+        }
+
+        .navbar .menu-mobile {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .hamburger {
+            display: none; /* Hide on larger screens */
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .link {
+            color: #E0E0E0;
+            text-decoration: none;
+        }
+
+        .navbar .link.active {
+            color: #FFA726;
+        }
+
+        /* Header Section */
+        #header {
+            padding: 50px 20px;
+            background-color: #1E1E1E;
+            text-align: center;
+        }
+
+        .title span {
+            color: #FFA726;
+        }
+
+        .description {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        /* Cart Content */
+        .cart-content {
+            margin: 20px;
+            padding: 20px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
+            width: 80%;
+            margin-left: 100px;
+            margin-right: 100px;        
+        }
+
+        .cart-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-content th, .cart-content td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-content th {
+            background-color: #333;
+        }
+
+        .cart-content .edit-button, .cart-content .remove-button {
+            background-color: #FFA726;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .cart-content .remove-button {
+            background-color: #E53935;
+        }
+
+        .cart-content .checkout-button {
+            background-color: #FFA726;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            width: 20%;
+            margin-left: 950px;
+        }
+
+        .cart-content .checkout-button:hover {
+            background-color: #FF8C00;
+        }
+
+        .cart-content label, .cart-content input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .cart-content input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #E0E0E0;
+            border-radius: 5px;
+        }
+
+        .cart-content input[type="checkbox"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="menu-mobile">
+            <a href="index.html">
+                <div class="logo">
+                    <img src="images/logo2.png" alt="Los Chicos logo" class="logo-img">
+                    <h3 class="server-name" style="color: #FFA726;">Los Chicos</h3>
+                </div>
+            </a>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars" style="color: #FFA726;"></i>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="index.html" class="link">Home</a>
+            <a href="rules.html" class="link">Rules</a>
+            <a href="admin-team.html" class="link">The Team</a>
+            <a href="contact.html" class="link">Contact</a>
+            <a href="shop.html" class="link">Shop</a>
+            <a href="cart.html" class="link">Cart</a>
+        </div>
+    </div>
+
+    <section id="header">
+        <div class="content">
+            <div class="info">
+                <p class="minecraft-server-ip">loschicos.mcgo.io</p>
+                <h1 class="title"><span>Manage </span> your Items <br> and Payment Details</h1>
+            </div>
+            <p class="description">
+                Manage Your Cart – Review and Purchase Your Favorite Items with Ease!
+            </p>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <div class="cart-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sub Total</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sample Item</td>
+                    <td>$10.00</td>
+                    <td>10 <button class="edit-button">Edit</button></td>
+                    <td>$10.00</td>
+                    <td><button class="remove-button">Remove</button></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <label for="minecraft-username">Minecraft Username:</label>
+        <input type="text" id="minecraft-username" style="width: 30%;" placeholder="Enter your Minecraft username">
+
+        <label for="email">Enter Email:</label>
+        <input type="text" id="email" style="width: 30%;" placeholder="Enter your email address">
+
+        <br>
+        <label>
+            <input type="checkbox" id="terms">I agree to the <a href="terms.html" style="color: #FFA726;">Terms Of Service</a>
+        </label>
+        <br>
+        <br>
+        
+        <button class="checkout-button">Checkout</button>
+    </div>
+  <!--Footer-->
+  <footer id="footer">
+    <p class="copyright">&copy; 2024 <span class="server-name-footer">Los Chicos</span>. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" class="link tiktok-link"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" class="link instagram-link"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://discord.com/invite/sEfxamqWkg" class="link discord-link-footer"><i class="fa-brands fa-discord"></i></a>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* Basic Styles */
+@import url('fonts.css');
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-image: url('images/header-background.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fade-in-container 1s ease forwards;
+    text-align: center;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+.back-button {
+    display: inline-block;
+    margin-top: 280px; /* or adjust as needed */
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-family: "Nabulist";
+    transition: background-color 0.3s ease;
+    text-align: left;
+    position: relative;
+    left: 0; /* Aligns the button to the left */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    margin-top: 10px; /* Adjusted space above the "About Me" heading */
+    color: #222;
+}
+
+.h2 {
+    font-size: 1em;
+    font-family: "Revamped", sans-serif;
+    margin-bottom: 20px;
+    margin-top: 10px; /* Adjusted space above the "About Me" heading */
+    color: #222;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.pp {
+    font-size: 1.2em;
+    font-family: "Nabulist";
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    margin-bottom: 30px;
+}
+
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+    margin-top: 40px;
+}
+
+.contact-info a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Custom Scrollbar */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #ffefda;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #ffbb00;
+    border-radius: 3px;
+    border: 3px solid #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #bd0000;
+}
+
+/* Animations */
+@keyframes fade-in-container {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fade-in 1.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation: slide-up 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-1s {
+    animation-delay: 1s;
+}
